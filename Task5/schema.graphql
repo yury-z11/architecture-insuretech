@@ -1,0 +1,40 @@
+type Client {
+  id: ID!
+  name: String
+  age: Int
+  documents: [Document!]!
+  relatives: [Relative!]!
+}
+
+"Документ клиента"
+type Document {
+  id: ID!
+  type: String
+  number: String
+  issueDate: String
+  expiryDate: String
+}
+
+"Родственник клиента"
+type Relative {
+  id: ID!
+  relationType: String
+  name: String
+  age: Int
+}
+
+"Корневые запросы GraphQL, эквивалент REST-эндпоинтам"
+type Query {
+  "Получить клиента по идентификатору (аналог GET /clients/{id})"
+  client(id: ID!): Client
+
+  "Получить документы клиента (аналог GET /clients/{id}/documents)"
+  clientDocuments(id: ID!): [Document!]!
+
+  "Получить родственников клиента (аналог GET /clients/{id}/relatives)"
+  clientRelatives(id: ID!): [Relative!]!
+}
+
+schema {
+  query: Query
+}
